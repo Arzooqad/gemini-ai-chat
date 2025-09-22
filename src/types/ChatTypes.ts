@@ -1,10 +1,15 @@
-export interface ChatMessage {
-    id: string;
-    content: string;
-    isUser: boolean;
-    timestamp: string;
-  }
-  
-  export interface MessageForm {
-    prompt: string;
-  }
+export interface ChatMessageProps {
+  id: string;
+  content: string;
+  isUser: boolean;
+}
+
+export interface MessageForm {
+  prompt: string;
+}
+
+export interface TypewriteMessageProps {
+  content: string;
+  shouldTypewrite: boolean;
+  onScroll: () => void;
+}

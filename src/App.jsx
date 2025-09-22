@@ -1,28 +1,16 @@
-import { GoogleGenAI } from '@google/genai';
-import './App.css'
-import { GEMINI_API_KEY } from './contants';
-import ChatList from './components/ChatList/ChatList';
+import "./App.css";
+import ChatList from "./components/ChatList/ChatList";
+import SualIcon from "./assets/sualIcon.svg";
 
 function App() {
-
-  const ai = new GoogleGenAI({apiKey: GEMINI_API_KEY});
-
-
-  async function main() {
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash-001',
-      contents: 'Why is the sky blue?',
-    });
-    console.log(response.text);
-  }
-  
-  main();
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-pink-50 overflow-hidden">
+      <div className="bg-white flex items-center justify-start py-2 px-6">
+        <img src={SualIcon} alt="Sual Logo" className="h-16" />
+      </div>
       <ChatList />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -11,5 +11,4 @@ export interface MessageForm {
 export interface TypewriteMessageProps {
   content: string;
   shouldTypewrite: boolean;
-  onScroll: () => void;
 }

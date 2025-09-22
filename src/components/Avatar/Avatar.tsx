@@ -6,7 +6,7 @@ const Avatar = ({
   text,
   className = "",
 }: {
-  icon?: React.ComponentType<{ className?: string }>;
+  icon?: any;
   text?: string;
   className?: string;
 }) => (

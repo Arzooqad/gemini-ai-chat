@@ -6,7 +6,6 @@ import { TypewriteMessageProps } from "../../types/ChatTypes";
 const TypewriteMessage = ({
   content,
   shouldTypewrite,
-  onScroll,
 }: TypewriteMessageProps) => {
   const [displayedContent, setDisplayedContent] = useState(
     shouldTypewrite ? "" : content
@@ -23,12 +22,11 @@ const TypewriteMessage = ({
       const timer = requestAnimationFrame(() => {
         setDisplayedContent(content.slice(0, currentIndex + 1));
         setCurrentIndex((prev) => prev + 1);
-        onScroll();
       });
 
       return () => cancelAnimationFrame(timer);
     }
-  }, [content, currentIndex, shouldTypewrite, onScroll]);
+  }, [content, currentIndex, shouldTypewrite]);
 
   useEffect(() => {
     if (shouldTypewrite) {
@@ -38,7 +36,7 @@ const TypewriteMessage = ({
   }, [content, shouldTypewrite]);
 
   return (
-    <div className="text-sm leading-relaxed">
+    <div className="text-sm leading-relaxed markdown-content">
       <Markdown>{displayedContent}</Markdown>
     </div>
   );

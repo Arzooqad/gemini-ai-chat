@@ -50,7 +50,7 @@ const ChatList = () => {
           contents: data.prompt,
         });
 
-        const aiMessageId = (Date.now() + 1).toString();
+        const aiMessageId = crypto.randomUUID();
         const aiMessage: ChatMessageProps = {
           id: aiMessageId,
           content: response.text || "",
@@ -61,11 +61,10 @@ const ChatList = () => {
         setTypewriteMessageId(aiMessageId);
         setIsLoading(false);
       } catch (error) {
-        console.error("Error generating content:", error);
-        const errorMessageId = (Date.now() + 1).toString();
+        const errorMessageId = crypto.randomUUID();
         const errorMessage: ChatMessageProps = {
           id: errorMessageId,
-          content: "Sorry, I encountered an error. Please try again.",
+          content: error.message || "Sorry, Something went wrong. Please try again.",
           isUser: false,
         };
         setMessages((prev) => [...prev, errorMessage]);
@@ -76,7 +75,7 @@ const ChatList = () => {
   );
 
   return (
-    <div className="flex flex-col md:mx-[20%] md:mb-8 rounded-b-3xl h-screen md:h-[calc(100vh-7rem)] bg-gradient-to-br from-purple-50 to-[#fffff5]">
+    <div className="flex flex-col md:mx-[8%] xl:mx-[20%] md:mb-8 rounded-b-3xl h-screen md:h-[calc(100vh-7rem)] bg-gradient-to-br from-purple-50 to-[#fffff5]">
       <div className="flex-1 overflow-y-auto p-6 my-4">
         {messages?.map((message) => (
           <div
@@ -86,14 +85,17 @@ const ChatList = () => {
               "justify-start": !message.isUser,
             })}
           >
-            <div className="flex items-start gap-3 max-w-xs lg:max-w-lg">
+            <div className="flex items-start gap-3 max-w-lg lg:max-w-3xl">
               {!message.isUser && <Avatar icon={LuUsers} />}
               <div
-                className={classNames("px-4 py-3 rounded-2xl", {
-                  "bg-gray-100 text-gray-900": message.isUser,
-                  "bg-white text-gray-900 shadow-sm border border-gray-200":
-                    !message.isUser,
-                })}
+                className={classNames(
+                  "px-4 py-3 rounded-2xl max-w-lg lg:max-w-3xl",
+                  {
+                    "bg-gray-100 text-gray-900": message.isUser,
+                    "bg-white text-gray-900 shadow-sm border border-gray-200":
+                      !message.isUser,
+                  }
+                )}
               >
                 {message.isUser ? (
                   <div className="text-sm leading-relaxed">
@@ -103,7 +105,6 @@ const ChatList = () => {
                   <TypewriteMessage
                     content={message.content}
                     shouldTypewrite={message.id === typewriteMessageId}
-                    onScroll={scrollToBottom}
                   />
                 )}
               </div>

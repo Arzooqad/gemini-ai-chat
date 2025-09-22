@@ -28,3 +28,10 @@
     white-space: pre-wrap;
   }
   
+  textarea.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  textarea.scrollbar-hide::-webkit-scrollbar {
+    display: none; 
+  }

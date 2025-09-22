@@ -22,7 +22,7 @@ const ChatInput = ({ onSubmit, isLoading }) => {
               required: "Message cannot be empty",
             })}
             placeholder="Message HR Assistant..."
-            className="w-full px-6 py-4 pr-16 bg-gray-100 rounded-[1.875rem] border border-gray-300 focus:outline-none transition-colors text-gray-700 placeholder-gray-400 shadow-sm resize-none"
+            className="w-full px-6 py-4 pr-16 bg-gray-100 rounded-[1.875rem] border border-gray-300 focus:outline-none transition-colors text-gray-700 placeholder-gray-400 shadow-sm resize-none scrollbar-hide"
             rows={2}
             onKeyDown={(e) => {
               if (e.key === "Enter" && !e.shiftKey) {
